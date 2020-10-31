@@ -8,10 +8,10 @@ import Post from './Post'
 
 const PostBoard = () => {
   const [posts, updatePosts] = useState([])
-  const [key, updateKey] = useState(0)
+  const [key, updateKey] = useState(1)
 
   const formButtonClickAction = (name, setName, post, setPost) => {
-    updatePosts([...posts, <Post key={key} name={name} post={post} />])
+    updatePosts([...posts, <Post key={key} name={name} post={post} id={key} />])
     updateKey(key + 1)
     setName('')
     setPost('')

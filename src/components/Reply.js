@@ -30,7 +30,19 @@ const Name = styled.h3`
   font-weight: bold;
 `;
 
-const Reply = ({ name, post, depth }) => {
+const ReplyTo = styled.p`
+  color: gray;
+  font-weight: lighter;
+`;
+
+const Text = styled.h4`
+  font-weight: bolder;
+  font-size: 18;
+`;
+
+const Reply = ({
+  name, post, depth, parentPost,
+}) => {
   const [formVisible, toggleForm] = useState(false)
   const [replies, updateReplies] = useState([])
   const [key, updateKey] = useState(0)
@@ -41,6 +53,7 @@ const Reply = ({ name, post, depth }) => {
       name={replyName}
       post={replyPost}
       depth={depth + 1}
+      parentPost={`Replying to ${name}: "${post}"`}
     />])
     updateKey(key + 1)
     toggleForm(false)
@@ -53,9 +66,10 @@ const Reply = ({ name, post, depth }) => {
         <br />
         <Wrapper>
           <Name>{name}</Name>
-          <h4>
+          <Text>
             {post}
-          </h4>
+          </Text>
+          <ReplyTo>{parentPost}</ReplyTo>
           {depth < 3
           && (
           <button
@@ -83,6 +97,7 @@ Reply.propTypes = {
   name: PropTypes.string.isRequired,
   post: PropTypes.string.isRequired,
   depth: PropTypes.number.isRequired,
+  parentPost: PropTypes.string.isRequired,
 };
 
 export default Reply

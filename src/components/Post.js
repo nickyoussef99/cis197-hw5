@@ -31,6 +31,11 @@ const Name = styled.h3`
   font-weight: bold;
 `;
 
+const Text = styled.h4`
+  font-weight: bolder;
+  font-size: 18;
+`;
+
 const Post = ({ name, post }) => {
   const [formVisible, toggleForm] = useState(false)
   const [replies, updateReplies] = useState([])
@@ -42,6 +47,7 @@ const Post = ({ name, post }) => {
       name={replyName}
       post={replyPost}
       depth={2}
+      parentPost={`Replying to ${name}: "${post}"`}
     />])
     updateKey(key + 1)
     toggleForm(false)
@@ -54,7 +60,7 @@ const Post = ({ name, post }) => {
         <br />
         <Wrapper>
           <Name>{name}</Name>
-          <h4>{post}</h4>
+          <Text>{post}</Text>
           <button
             type="submit"
             onClick={e => {
